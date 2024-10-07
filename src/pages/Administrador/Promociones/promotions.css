@@ -1,0 +1,28 @@
+
+.promotions__wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-left: .75rem;
+    padding-bottom: .75rem;
+    padding-right: .75rem;
+}
+
+.promotion__image{
+    max-width: 140px;
+    max-height: 140px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3rem;
+}
+
+.promotion__image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}

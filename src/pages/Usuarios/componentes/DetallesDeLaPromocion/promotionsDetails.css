@@ -1,0 +1,39 @@
+.promotion__details{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+
+}
+
+.promotion__img{
+    max-width: 350px;
+    max-height: auto;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    border-radius: .75rem;
+    margin-bottom: .5rem;
+}
+
+.promotion__img img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.promotion__body{
+    display: flex;
+    flex-direction: column;
+    margin: .5rem;
+    flex: 1;
+}
+
+@media(max-width:800px){
+    .promotion__details{
+        flex-direction: column;
+    }
+
+    .promotion__img{
+        max-width: 100%;
+        
+    }
+}

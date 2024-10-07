@@ -1,0 +1,18 @@
+.banner__image{
+    max-width: 100px;
+    max-height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3rem;
+}
+
+.banner__image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    scale: 0.8;
+}

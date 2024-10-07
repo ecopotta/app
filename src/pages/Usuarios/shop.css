@@ -1,0 +1,41 @@
+.products__container{
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: .75rem;
+  min-height: 50vh;
+}
+
+.products__filters{
+  display: flex;
+  gap: 1rem;
+  padding: .5rem;
+}
+
+.search__container{
+  max-width: 30%;
+  width: 100%;
+}
+
+.categories__container{
+  max-width: 20%;
+  width: 100%;
+}
+
+@media(max-width:768px){
+  .categories__container{
+    max-width: 50%;
+  }
+  .search__container{
+    max-width: 100%;
+  }
+}
+
+.empty__container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
