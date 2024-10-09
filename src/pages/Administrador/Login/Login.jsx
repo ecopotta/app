@@ -22,7 +22,7 @@ const Login = () => {
   useEffect(() => {
     if (isAuthenticated) {
       if (user?.email === allowedEmail) {
-        navigate("/admin-dashboard");
+        navigate("/products-and-categories");
       } else {
         openNotification(); 
          
