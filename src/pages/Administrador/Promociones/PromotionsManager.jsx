@@ -8,7 +8,6 @@ import dayjs from 'dayjs'
 import { useAppContext } from '../../../Context'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import {Element, scroller } from 'react-scroll';
-import Markdown from 'react-markdown'
 import ReactQuill from 'react-quill'
 
 function PromotionsManager() {
@@ -103,7 +102,7 @@ function PromotionsManager() {
 
     const shortenString = (str, limit = 100) => {
         if (str.length > limit) {
-            return <Markdown>{str.slice(0,limit) + "..."}</Markdown>
+            return str.slice(0,limit) + "..."
         }else{
             return str
         }

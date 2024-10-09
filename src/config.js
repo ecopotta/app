@@ -1,5 +1,5 @@
 export const config = {
-    apibaseUrl:"http://localhost:4000",
+    apibaseUrl:"https://macetas-brian-server.cyr-app.online",
 }
 
 // https://macetas-brian-server.cyr-app.online
