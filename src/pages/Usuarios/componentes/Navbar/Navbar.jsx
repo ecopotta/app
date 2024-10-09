@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import "../../../Administrador/../Barra de navegacion/AdminNavbar.css";
 import menuIcon from "../../../../assets/menuIcon.svg";
-import logoIcon from "../../../../assets/Logo.png";
+import logoIcon from "../../../../assets/logo.webp";
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import "./AdminNavbar.css";
 import menuIcon from "../../assets/menuIcon.svg";
-import logoIcon from "../../assets/Logo.png";
+import logoIcon from "../../assets/logo.webp";
 import LogoutButton from "../../pages/Administrador/Logout/Logout";
 
 function AdminNavbar() {
@@ -44,7 +44,7 @@ function AdminNavbar() {
           {/* <li className={isActive("/settings") ? "active" : ""}>
             <Link to="/settings">Ajustes</Link>
           </li> */}
-          
+
           <LogoutButton />
         </ul>
       </nav>
