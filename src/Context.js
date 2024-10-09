@@ -2,8 +2,6 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import Pica from "pica";
 import { message } from "antd";
 import { config } from "./config";
-import { useAuth0 } from "@auth0/auth0-react";
-import dayjs from "dayjs";
 
 const Context = createContext();
 
@@ -16,7 +14,7 @@ export const useAppContext = () => {
 }
 
 export const AppContextProvider = ({ children }) => {
-    const { isAuthenticated, isLoading } = useAuth0();
+    
     const processImages = async (imagesArray) => {
         const pica = Pica();
         if (imagesArray.length === 0 || !imagesArray) {
@@ -132,9 +130,7 @@ export const AppContextProvider = ({ children }) => {
     const [banners, setBanners] = useState([])  
     const [fetchingData, setFetchingData] = useState(false)
 
-const getData = async () => {
-        const hiddenMessage = message.loading("Aguarde...", 0)
-        
+const getData = async () => {        
         try {
             const response = await fetch(`${config.apibaseUrl}/get-data`);
             const data = await response.json();
@@ -149,10 +145,7 @@ const getData = async () => {
             } else {
                 message.error("Error de conexión, verifique su internet.", 3)
             }
-        } finally {
-            hiddenMessage()
-            
-        }
+        } 
     }
 
     const [productsByImages, setProductsByImages] = useState([])
@@ -184,7 +177,7 @@ const getData = async () => {
     useEffect(() => {
         (async () => {
             setFetchingData(true)
-            if (!alreadyFetch.current && !isLoading) {
+            if (!alreadyFetch.current) {
                 
                 const hiddenMessage = message.loading("Cargando...", 0)
                 alreadyFetch.current = true
@@ -193,7 +186,7 @@ const getData = async () => {
                 setFetchingData(false)
             }
         })()
-    }, [isLoading, isAuthenticated])
+    }, [])
 
     const updateCategory = async(category) => {
         const hiddenMessage = message.loading("Aguarde...", 0)

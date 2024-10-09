@@ -8,20 +8,11 @@ import Search from 'antd/es/transfer/search'
 import { Empty, Select, Typography } from 'antd'
 const { Option } = Select
 function Shop() {
-  const { categories, productsByImages, ajustes, fetchingData } = useAppContext()
+  const { categories, productsByImages, fetchingData } = useAppContext()
   const [searchText, setSearchText] = useState("")
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const parsedSettings = (() => {
-    try {
-      return ajustes.length > 0 ? JSON.parse(ajustes[0]?.settings) : {};
-    } catch (error) {
-      console.log("Error al formatear los ajustes:", error);
-      return {};
-    }
-  })();
 
-  const settings = parsedSettings || {}
   const handleSearch = (value) => {
     setSearchText(value);
   };
@@ -33,7 +24,6 @@ function Shop() {
     const matchesCategory = selectedCategory ? prod.id_product_category === selectedCategory : true
     return matchedSearch && matchesCategory
   }) || []
-  console.log(fetchingData)
   return (
     <>
       {fetchingData ? (

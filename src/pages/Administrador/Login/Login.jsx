@@ -1,46 +1,76 @@
-// src/LoginButton.js
-import React, { useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { Link, useNavigate } from 'react-router-dom';
-import { notification } from 'antd'; // Importar el sistema de notificaciones de Ant Design
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate} from 'react-router-dom';
+import { notification } from 'antd'; 
 import "./login.css";
+import { SignInButton, useUser, useAuth, useClerk } from '@clerk/clerk-react';
 
 const Login = () => {
-  const { loginWithRedirect, isAuthenticated, user, logout,isLoading } = useAuth0();
-  const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
-
-  const allowedEmail = process.env.REACT_APP_ALLOWED_EMAIL;
-
-  const openNotification = () => {
-    api.info({
-      message: `Ingreso no autorizado`,
-      description: "El usuario no está autorizado para acceder a esta sección",
-    });
-  };
-
+  const { isLoaded,isSignedIn } = useAuth();
+  const navigate = useNavigate()
+  const { user } = useUser();
+  const { signOut } = useClerk()
+  const [invalidUser, setInvalidUser] = useState(false);
+  const allowedID = process.env.REACT_APP_ALLOWED_ID
+  const alreadyVerify = useRef(false)
   useEffect(() => {
-    if (isAuthenticated) {
-      if (user?.email === allowedEmail) {
-        navigate("/products-and-categories");
-      } else {
-        openNotification(); 
-         
-        setTimeout(() => {
-          logout();
-        },1000 *4)
+      if (isSignedIn && user && !alreadyVerify.current) {
+        
+        if (allowedID !== user.id) {
+          alreadyVerify.current = true
+          setInvalidUser(true)
+          notification.error({
+            message: 'Error',
+            description: 'No tienes permisos para acceder aquí',
+            
+          })
+          setTimeout(() => {
+            signOut();
+          }, 1000*5);
+          
+        }else{
+          navigate('/products-and-categories'); 
+        }
       }
-    }
-  }, [isAuthenticated, user, allowedEmail, navigate, logout]);
+    }, [isSignedIn, user, navigate, signOut, allowedID]);
 
+const [cuentaRegresiva, setCuentaRegresiva] = useState(5);
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCuentaRegresiva(prevCuenta => {
+      if (prevCuenta > 0) {
+        return prevCuenta - 1;
+      } else {
+        clearInterval(interval);
+        return 0;
+      }
+    });
+  }, 1000);
+
+  return () => clearInterval(interval); 
+}, []);
   return (
     <div className="login__wrapper">
-      {contextHolder} 
+      {contextHolder}
       <div className="login__hero">
         <h2 className="login__title">Hola, ¡Qué bueno verte de vuelta!</h2>
-        <button onClick={() => loginWithRedirect()} className="login__button" disabled={isLoading}>{isLoading ? <span class="loader"></span> : "Ingresar"}</button>
+        
+        <SignInButton asChild>
+          <button 
+            className="login__button"
+            style={{backgroundColor: invalidUser ? "red" : ""}}
+            disabled={!isLoaded || invalidUser}
+          >
+            {invalidUser ? <>
+              <p>Redirigiendote en {cuentaRegresiva}...</p>
+              
+            </> : isLoaded ? 'Ingresar' : 'Cargando...'}
+          </button>
+        </SignInButton>
 
-        <p className='login__text'>¿No eres administrador? <Link className='login__link' to={"/shop"}>Regresar a la tienda</Link></p>
+        <p className='login__text'>
+          ¿No eres administrador? <Link className='login__link' to={"/shop"}>Regresar a la tienda</Link>
+        </p>
       </div>
     </div>
   );
