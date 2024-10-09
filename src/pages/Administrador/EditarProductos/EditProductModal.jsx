@@ -2,8 +2,7 @@ import { Button, Collapse, Divider, Input, Modal, Select, Upload } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../../../Context';
 import { Form } from 'antd';
-import Markdown from "react-markdown"
-import TextHelp from '../Ayuda/HelpText';
+
 import ReactQuill from 'react-quill';
 function EditProductModal({ closeModal, product }) {
     const { editProduct, categories } = useAppContext();
