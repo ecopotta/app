@@ -130,9 +130,9 @@ export const AppContextProvider = ({ children }) => {
     const [imagesArray, setImagesArray] = useState([])
     const [promotions, setPromotions] = useState([])
     const [banners, setBanners] = useState([])  
-    const [ajustes, setAjustes] = useState([])
     const [fetchingData, setFetchingData] = useState(false)
-    const getData = async () => {
+
+const getData = async () => {
         const hiddenMessage = message.loading("Aguarde...", 0)
         
         try {
@@ -143,7 +143,6 @@ export const AppContextProvider = ({ children }) => {
             setImagesArray(data.imageUrls)
             setPromotions(data.promotions)
             setBanners(data.banners)
-            setAjustes(data.ajustes)
         } catch (error) {
             if (error.response) {
                 message.error(`${error.response.message}`, 5);
@@ -568,15 +567,12 @@ export const AppContextProvider = ({ children }) => {
     }
     
     const updateSettings = async(settings) => {
+        console.log(settings)
         const hiddenMessage = message.loading("Guardando...", 0)
         try {
-            const response = await fetch(`${config.apibaseUrl}/update-settings`, {
-                method: "PUT",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(settings)
-            })
+            const response = await fetch(`${config.apibaseUrl}/update-settings/?state=${settings}`, {
+                method: "PUT",                
+            });
             const responseData = await response.json()
             if (response.status === 200) {
                 await getData()
@@ -604,7 +600,6 @@ export const AppContextProvider = ({ children }) => {
             editPromotion,deletePromotion,
             uploadBanner,banners,
             updateBanner,deleteBanner,
-            ajustes,updateSettings,
             fetchingData
         }}>
             {children}

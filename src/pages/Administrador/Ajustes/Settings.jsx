@@ -6,22 +6,24 @@ import { List, Switch, message, Space } from 'antd';
 function Settings() {
     const { ajustes, updateSettings } = useAppContext();
     const [parsedSettings, setParsedSettings] = useState([]);
-
+    console.log(parsedSettings)
+    console.log(ajustes)
     useEffect(() => {
         if (ajustes && ajustes.length > 0) {
-            setParsedSettings([JSON.parse(ajustes[0].settings)]);
+            setParsedSettings([JSON.parse(ajustes[0].settings)?.page_enabled]);
         }
     }, [ajustes]);
 
     const [updating, setUpdating] = useState(false);
 
-    const handleSwitchChange = async (key, value) => {
-        const updatedSettings = {
-            ...parsedSettings[0],
-            [key]: value,
-        };
+    const handleSwitchChange = async (value) => {
+        // const updatedSettings = {
+        //     ...parsedSettings[0],
+        //     [key]: value,
+        // };
+        // console.log(value)
         setUpdating(true);
-        await updateSettings(updatedSettings);
+        await updateSettings(value);
         setUpdating(false);
     };
 
@@ -56,7 +58,7 @@ function Settings() {
                                 <Switch
                                     checked={item.value}
                                     loading={updating}
-                                    onChange={(value) => handleSwitchChange(item.key, value)}
+                                    onChange={(value) => handleSwitchChange(value)}
                                 />
                             </Space>
                         </List.Item>

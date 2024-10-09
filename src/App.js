@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Administrador/Login/Login.jsx';
 import PrivateRoute from './Auth/PrivateRoute.js'; 
 import AdminDashboard from './pages/Administrador/AdminDashboard.jsx'; 
@@ -59,13 +59,18 @@ const App = () => {
         }
         />
 
-        <Route
+        {/* <Route
         path='/settings'
         element={
           <PrivateRoute>
             <Settings />
           </PrivateRoute>
         }
+        /> */}
+
+        <Route
+        path='*'
+        element={<Navigate to="/shop" replace />}
         />
       </Routes>
     </div>

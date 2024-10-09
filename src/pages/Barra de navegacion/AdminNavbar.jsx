@@ -41,9 +41,10 @@ function AdminNavbar() {
           <li className={isActive("/banners") ? "active" : ""}>
             <Link to="/banners">Banners</Link>
           </li>
-          <li className={isActive("/settings") ? "active" : ""}>
+          {/* <li className={isActive("/settings") ? "active" : ""}>
             <Link to="/settings">Ajustes</Link>
-          </li>
+          </li> */}
+          
           <LogoutButton />
         </ul>
       </nav>
@@ -75,9 +76,9 @@ function AdminNavbar() {
             <li className={isActive("/banners") ? "active" : ""} onClick={closeNav}>
               <Link to="/banners">Banners</Link>
             </li>
-            <li className={isActive("/settings") ? "active" : ""} onClick={closeNav}>
+            {/* <li className={isActive("/settings") ? "active" : ""} onClick={closeNav}>
               <Link to="/settings">Ajustes</Link>
-            </li>
+            </li> */}
             <LogoutButton />
           </ul>
         </div>

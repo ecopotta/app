@@ -40,8 +40,7 @@ function Shop() {
         <div className='loader__wrapper'>Aguarde...<span class="loader"></span></div>
       ) : (
         <div className="container__wrapper">
-          {settings.page_enabled ? (
-            <>
+         <>
               <Navbar />
               <Carousel />
               <div className="products__filters">
@@ -63,21 +62,6 @@ function Shop() {
                 <ProductsView products={filteredProducts} />
               </div>
             </>
-          ) : (
-            <div className="empty__container">
-              <Empty
-                image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-                imageStyle={{
-                  height: 120,
-                }}
-                description={
-                  <Typography.Text>
-                    <strong>Por el momento, Esta página esta inhabilitada, por favor vuelve mas tarde!.</strong>
-                  </Typography.Text>
-                }
-              />
-            </div>
-          )}
         </div>
       )}
     </>
